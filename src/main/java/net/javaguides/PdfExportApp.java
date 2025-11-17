@@ -8,6 +8,7 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -146,6 +147,18 @@ public class PdfExportApp extends JFrame {
 
             JOptionPane.showMessageDialog(this, "PDF Exported Successfully!");
 
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Cannot write to file! Check permissions.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,
+                    "An error occurred: " + ex.getMessage(),
+                    "Unknown Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
+
     }
 }
