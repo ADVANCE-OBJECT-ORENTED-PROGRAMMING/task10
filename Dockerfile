@@ -1,5 +1,5 @@
 # Use a valid OpenJDK 17 image
-FROM openjdk:17-jdk
+FROM eclipse-temurin:17-jdk
 
 # Copy source code into container
 COPY src/main/java /app
