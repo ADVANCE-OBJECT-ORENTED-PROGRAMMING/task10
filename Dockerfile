@@ -1,15 +1,14 @@
-# Base image Java
-FROM openjdk:17
+# Use a stable Java 17 image from Eclipse Temurin
+FROM eclipse-temurin:17-jdk-alpine
 
-# Copy source code into container
-COPY src/main/java /app
+# Set working directory
 WORKDIR /app
 
-# Compile Java files
-RUN javac net/javaguides/*.java
+# Copy all files to container
+COPY . .
 
-# Expose port if needed
-EXPOSE 8080
+# Compile the Java files
+RUN javac -d . src/main/java/net/javaguides/*.java
 
-# Run main class
+# Run your main Java class (change if needed)
 CMD ["java", "net.javaguides.Main"]
