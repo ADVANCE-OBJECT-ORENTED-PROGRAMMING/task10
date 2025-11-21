@@ -1,14 +1,12 @@
-# Use official OpenJDK image
-FROM openjdk:17-jdk-slim
+# Use a lightweight Nginx (Alpine) image as the base
+FROM nginx:alpine
 
-# Create app folder inside container
-WORKDIR /app
+# Copy all your application files (HTML, CSS, etc.) from the Jenkins workspace 
+# into the Nginx default web root directory inside the container.
+COPY . /usr/share/nginx/html
 
-# Copy all project files into container
-COPY . .
+# Document that the container will listen on port 80 at runtime
+EXPOSE 80
 
-# Compile the Java files
-RUN javac -d . src/main/java/net/javaguides/*.java
-
-# Run the main class (change name if needed)
-CMD ["java", "net.javaguides.Main"]
+# Default command to start the Nginx web server
+CMD ["nginx", "-g", "daemon off;"]
