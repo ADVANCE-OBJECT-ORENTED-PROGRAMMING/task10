@@ -1,13 +1,15 @@
 # Use official Java runtime
 FROM eclipse-temurin:17-jdk-alpine
 
+# Set working directory
 WORKDIR /app
 
-# Copy all Java files into container
-COPY . /app
+# Copy Java files from GitHub repo
+COPY src/main/java/net/javaguides/ /app/
 
 # Compile Java files
-RUN javac *.java
+RUN javac Main.java PdfExportApp.java
 
-# Run main class
-CMD ["java", "Main"]  # replace Main with your main class name
+# Run the main class
+CMD ["java", "Main"]
+
