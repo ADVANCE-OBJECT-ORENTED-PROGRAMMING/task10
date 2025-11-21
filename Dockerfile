@@ -1,15 +1,17 @@
-# Use official Java runtime
+# Use official Java 17 runtime
 FROM eclipse-temurin:17-jdk-alpine
 
-# Set working directory
+# Set working directory inside container
 WORKDIR /app
 
-# Copy Java files from GitHub repo
+# Copy Java source files
 COPY src/main/java/net/javaguides/ /app/
 
-# Compile Java files
-RUN javac Main.java PdfExportApp.java
+# Copy iText JAR
+COPY libs/itextpdf-5.5.13.3.jar /app/libs/
 
-# Run the main class
-CMD ["java", "Main"]
+# Compile Java files with iText classpath
+RUN javac -cp libs/itextpdf-5.5.13.3.jar Main.java PdfExportApp.java
 
+# Run main class with iText in classpath
+CMD ["java", "-cp", ".:libs/itextpdf-5.5.13.3.jar", "Main"]
